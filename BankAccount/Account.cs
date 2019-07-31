@@ -11,7 +11,27 @@ namespace BankAccount
     /// </summary>
     public class Account
     {
-        public string AccountNumber { get; set; }
+        private string _accountNumber;
+
+        public string AccountNumber
+        {
+            get
+            {
+                return _accountNumber;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"{nameof(AccountNumber)} cannot be null");
+                }
+                if (value.Contains("#"))
+                {
+                    throw new ArgumentException($"{nameof(AccountNumber)} cannot contain # signs");
+                }
+                _accountNumber = value;
+            }
+        }
 
         public string Owner { get; set; }
 
